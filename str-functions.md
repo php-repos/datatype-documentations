@@ -1,4 +1,4 @@
-# Introduction
+a# Introduction
 
 The `Str` namespace is part of the Datatype package.
 Here you can see a list of included functions and their documentation.
@@ -17,7 +17,7 @@ The `after_first_occurance` returns the substring of the given subject after the
 
 It returns the subject if the needle is an empty string.
 
-It returns an empty string when the subject does not contain the needle.
+It returns the subject string when the subject does not contain the needle.
 
 ### Examples
 
@@ -25,7 +25,7 @@ It returns an empty string when the subject does not contain the needle.
 echo after_first_occurrence('hello world', ''); // Output: 'hello world'
 echo after_first_occurrence('My\Class\Name', '\\'); // Output: 'Class\Name'
 echo after_first_occurrence('This is another sentence contains i to test', 'c'); // Output: 'e contains i to test'
-echo after_first_occurrence('hello world', 'my'); // Output: ''
+echo after_first_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
 
 ## after_last_occurrence
@@ -38,19 +38,19 @@ after_last_occurrence(string $subject, string $needle): string
 
 ### Definition
 
-The `after_last_occurrence` returns the substring of the given subject after the last occurrence of the given needle.
+The `after_last_occurrence` returns the given subject’s substring after the given needle’s last occurrence.
 
-It returns an empty string when the needle is empty.
+It returns the subject string when the needle is empty.
 
-It returns an empty string when the subject does not contain the needle.
+It returns the subject string when the subject does not contain the needle.
 
 ### Examples
 
 ```php
-echo after_last_occurrence('hello world', ''); // Output: ''
+echo after_last_occurrence('hello world', ''); // Output: 'hello world'
 echo after_last_occurrence('My\Class\Name', '\\'); // Output: 'Name'
 echo after_last_occurrence('This is another sentence contains i to test', 'c'); // Output: ' to test'
-echo after_last_occurrence('hello world', 'my'); // Output: ''
+echo after_last_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
 
 ## before_first_occurrence
@@ -65,17 +65,17 @@ before_first_occurrence(string $subject, string $needle): string
 
 The `before_first_occurrence` returns the substring of the given subject before the first occurrence of the given needle.
 
-It returns an empty string when the needle is empty.
+It returns the subject string when the needle is empty.
 
-It returns an empty string when the subject does not contain the needle.
+It returns the subject string when the subject does not contain the needle.
 
 ### Examples
 
 ```php
-echo before_first_occurrence('hello world', ''); // Output: ''
+echo before_first_occurrence('hello world', ''); // Output: 'hello world'
 echo before_first_occurrence('My\Class\Name', '\\'); // Output: 'My'
 echo before_first_occurrence('This is another sentence contains i to test', 'c'); // Output: 'This is another senten'
-echo before_first_occurrence('hello world', 'my'); // Output: ''
+echo before_first_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
 
 ## before_last_occurrence
@@ -208,7 +208,7 @@ It replaces the first occurrence of the given substring in the given subject.
 
 It returns an empty string when the given subject is an empty string.
 
-It returns the subject when the subject does not contain the given search substring.
+It returns the subject when it does not contain the search substring.
 
 ### Examples
 
