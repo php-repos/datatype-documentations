@@ -130,6 +130,28 @@ echo between('This is hello world', '', ' world'); // Output: 'This is hello'
 echo between('This is hello world', '', ''); // Output: 'This is hello world'
 ```
 
+## first_character
+
+### Signature
+
+```php
+first_character(string $subject): string
+```
+
+### Definition
+
+It returns the first character of the given subject.
+
+It returns an empty string when the subject is an empty string.
+
+### Examples
+
+```php
+echo last_character('Hello World'); // Output: 'H'
+echo last_character(' Hello World!'); // Output: ' '
+echo last_character(''); // Output: ''
+```
+
 ## last_character
 
 ### Signature
