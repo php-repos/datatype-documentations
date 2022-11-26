@@ -147,9 +147,9 @@ It returns an empty string when the subject is an empty string.
 ### Examples
 
 ```php
-echo last_character('Hello World'); // Output: 'H'
-echo last_character(' Hello World!'); // Output: ' '
-echo last_character(''); // Output: ''
+echo first_character('Hello World'); // Output: 'H'
+echo first_character(' Hello World!'); // Output: ' '
+echo first_character(''); // Output: ''
 ```
 
 ## last_character
