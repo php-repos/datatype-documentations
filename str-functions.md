@@ -1,14 +1,15 @@
-a# Introduction
+# Introduction
 
 The `Str` namespace is part of the Datatype package.
 Here you can see a list of included functions and their documentation.
 
+---
 ## after_first_occurrence
 
 ### Signature
 
 ```php
-after_first_occurrence(string $subject, string $needle): string
+function after_first_occurrence(string $subject, string $needle): string
 ```
 
 ### Definition
@@ -27,13 +28,13 @@ echo after_first_occurrence('My\Class\Name', '\\'); // Output: 'Class\Name'
 echo after_first_occurrence('This is another sentence contains i to test', 'c'); // Output: 'e contains i to test'
 echo after_first_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
-
+---
 ## after_last_occurrence
 
 ### Signature
 
 ```php
-after_last_occurrence(string $subject, string $needle): string
+function after_last_occurrence(string $subject, string $needle): string
 ```
 
 ### Definition
@@ -52,13 +53,13 @@ echo after_last_occurrence('My\Class\Name', '\\'); // Output: 'Name'
 echo after_last_occurrence('This is another sentence contains i to test', 'c'); // Output: ' to test'
 echo after_last_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
-
+---
 ## before_first_occurrence
 
 ### Signature
 
 ```php
-before_first_occurrence(string $subject, string $needle): string
+function before_first_occurrence(string $subject, string $needle): string
 ```
 
 ### Definition
@@ -77,13 +78,13 @@ echo before_first_occurrence('My\Class\Name', '\\'); // Output: 'My'
 echo before_first_occurrence('This is another sentence contains i to test', 'c'); // Output: 'This is another senten'
 echo before_first_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
-
+---
 ## before_last_occurrence
 
 ### Signature
 
 ```php
-before_last_occurrence(string $subject, string $needle): string
+function before_last_occurrence(string $subject, string $needle): string
 ```
 
 ### Definition
@@ -102,7 +103,7 @@ echo before_last_occurrence('My\Class\Name', '\\'); // Output: 'My\Class'
 echo before_last_occurrence('This is another sentence contains i to test', 'i'); // Output: 'This is another sentence contains '
 echo before_last_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
-
+---
 ## between
 
 ### Signature
@@ -129,13 +130,13 @@ echo between('This is hello world', 'This is ', ' world'); // Output: 'hello'
 echo between('This is hello world', '', ' world'); // Output: 'This is hello'
 echo between('This is hello world', '', ''); // Output: 'This is hello world'
 ```
-
+---
 ## first_character
 
 ### Signature
 
 ```php
-first_character(string $subject): string
+function first_character(string $subject): string
 ```
 
 ### Definition
@@ -151,13 +152,13 @@ echo first_character('Hello World'); // Output: 'H'
 echo first_character(' Hello World!'); // Output: ' '
 echo first_character(''); // Output: ''
 ```
-
+---
 ## last_character
 
 ### Signature
 
 ```php
-last_character(string $subject): string
+function last_character(string $subject): string
 ```
 
 ### Definition
@@ -173,13 +174,13 @@ echo last_character('Hello World'); // Output: 'd'
 echo last_character('Hello World!'); // Output: '!'
 echo last_character(''); // Output: ''
 ```
-
+---
 ## remove_first_character
 
 ### Signature
 
 ```php
-remove_first_character(string $subject): string
+function remove_first_character(string $subject): string
 ```
 
 ### Definition
@@ -194,13 +195,13 @@ It returns an empty string when the given string is an empty string.
 echo remove_first_character('hello world'); // Output: 'ello world'
 echo remove_first_character(''); // Output: ''
 ```
-
+---
 ## remove_last_character
 
 ### Signature
 
 ```php
-remove_last_character(string $subject): string
+function remove_last_character(string $subject): string
 ```
 
 ### Definition
@@ -215,13 +216,13 @@ It returns an empty string when the given string is an empty string.
 echo remove_last_character('hello world'); // Output: 'hello worl'
 echo remove_last_character(''); // Output: ''
 ```
-
+---
 ## replace_first_occurrence
 
 ### Signature
 
 ```php
-replace_first_occurrence(string $subject, string $search, string $replace): string
+function replace_first_occurrence(string $subject, string $search, string $replace): string
 ```
 
 ### Definition
@@ -241,13 +242,13 @@ echo replace_first_occurrence('hello world hello', 'hello', 'hi'); // Output: 'h
 echo replace_first_occurrence('', 'hello', 'hi'); // Output: ''
 echo replace_first_occurrence('hello world', 'universe', 'hi'); // Output: 'hello world'
 ```
-
+---
 ## starts_with_regex
 
 ### Signature
 
 ```php
-starts_with_regex(string $subject, string $pattern): bool
+function starts_with_regex(string $subject, string $pattern): bool
 ```
 
 ### Definition
@@ -267,3 +268,4 @@ echo (string) starts_with_regex('c:\\filename', '[A-Za-z]:\\'); // Output: 1
 echo (string) starts_with_regex(':\\', '[A-Za-z]:\\'); // Output: 0
 echo (string) starts_with_regex('/root', '[A-Za-z]:\\'); // Output: 0
 ```
+---
