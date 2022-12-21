@@ -32,29 +32,20 @@ Here you can find a list of available classes in this package.
 
 ### Text
 
-The `Text` class is an abstract class for any text string.
-By default, this class runs a validation against your text and throws an `InvalidArgumentException` if the given text is invalid.
-If you extend this class, you need to define an `is_valid` method.
+The `Text` class is a class for any text string.
 For more information, please read [its documentation](https://saeghe.com/packages/datatype/documentations/text-class)
-
-> **Note**
-> This class accepts a `string` so if you pass a `null` to it, the string sets as an empty string.
-
-### AnyText
-
-The `AnyText` class is a default class that accepts any text string.
-This class extends the `Text` abstract class and can be used wherever you don’t have any validation rules for the string.
-For more information, please read [its documentation](https://saeghe.com/packages/datatype/documentations/any-text-class)
 
 ### Collection
 
-Just like what the `Text` class is to strings, the `Collection` class is to arrays.
-You can extend this class to validate the type of acceptable keys and values for your collection.
-Extending from this class force you to implement two methods, the `is_valid_key` and the `is_valid_value` that should return a boolean result.
+The `Collection` class gives you the ability to work with arrays as they were objects.
 For more information, please read [its documentation](https://saeghe.com/packages/datatype/documentations/collection-class)
 
-### ArrayCollection
+### Map
 
-The `ArrayCollection` class allows you to use the collection methods against any set of key values.
-You can consider it as a regular array that has access to the `Collection` methods.
-For more information, please read [its documentation](https://saeghe.com/packages/datatype/documentations/array-collection-class)
+The `Map` class can be used for storing and working with a collection of Pair objects.
+For more information, please read [its documentation](https://saeghe.com/packages/datatype/documentations/map-class)
+
+### Pair
+
+The `Pair` class is a very helpful class where you have a pair of data like a pair of symlink to a file.
+For more information, please read [its documentation](https://saeghe.com/packages/datatype/documentations/pair-class)

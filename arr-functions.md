@@ -9,7 +9,7 @@ Here you can see a list of included functions and their documentation.
 ### Signature
 
 ```php
-function every(array $array, \Closure $check = null): bool
+function every(array $array, Closure $check = null): bool
 ```
 
 ### Definition
@@ -36,7 +36,7 @@ echo (int) every([null, 0, '', []]); // Output: 0
 ### Signature
 
 ```php
-function first_key(array $array, \Closure $condition = null): mixed
+function first_key(array $array, Closure $condition = null): string|int|null
 ```
 
 ### Definition
@@ -60,12 +60,13 @@ echo first_key('foo' => ['bar'], 'bar' => 'baz'); // Output: 'foo'
 assert_true(null === first_key([]));
 ```
 ---
+---
 ## first
 
 ### Signature
 
 ```php
-function first(array $array, \Closure $condition = null): mixed
+function first(array $array, Closure $condition = null): mixed
 ```
 
 ### Definition
@@ -88,13 +89,34 @@ assert_true(1 === first([1, 'foo']));
 assert_true(['bar'] === first(['bar'], 'foo'));
 assert_true(null === first([]));
 ```
+## forget
+
+### Signature
+
+```php
+function forget(array $array, Closure $condition): array
+```
+
+### Definition
+
+It unsets items in the given array that matches the given condition.
+
+### Examples
+
+```php
+use function Saeghe\Datatype\Arr\forget;
+
+$array = ['foo', 'bar', 'baz'];
+
+assert_true([2 => 'baz'] === forget($array, fn ($value, $key) => $value === 'foo' || $key === 1));
+```
 ---
 ## has
 
 ### Signature
 
 ```php
-function has(array $array, \Closure $closure): bool
+function has(array $array, Closure $closure): bool
 ```
 
 ### Definition
@@ -141,7 +163,7 @@ insert_after(['a' => 'foo', 'b' => 'baz'], 'd', ['c' => 'bar']); // Output: ['a'
 ### Signature
 
 ```php
-function last_key(array $array, \Closure $condition = null): mixed
+function last_key(array $array, Closure $condition = null): null|int|string
 ```
 
 ### Definition
@@ -155,7 +177,7 @@ It returns `null` when the given array is empty.
 ### Examples
 
 ```php
-use function Saeghe\Datatype\Arr\last;
+use function Saeghe\Datatype\Arr\last_key;
 
 assert_true('baz' === last_key(['foo' => 1, 'bar' => 2, 'baz' => 2], fn ($item, $key) => $item === 2));
 assert_true(null === last_key([]));
@@ -170,7 +192,7 @@ assert_true('foo' === last_key(['bar' => 'baz', 'foo' => ['bar']]));
 ### Signature
 
 ```php
-function last(array $array, \Closure $condition = null): mixed
+function last(array $array, Closure $condition = null): mixed
 ```
 
 ### Definition
@@ -192,5 +214,82 @@ assert_true(null === last(['foo', null]));
 assert_true(1 === last(['foo', 1]));
 assert_true(['bar'] === last(['foo', ['bar']]));
 assert_true(null === last([]))
+```
+---
+## map
+
+### Signature
+
+```php
+function map(array $array, Closure $callback): array
+```
+
+### Definition
+
+It maps items in the given array and returns an array by the return values of the given callback for each item.
+
+### Examples
+
+```php
+use function Saeghe\Datatype\Arr\map;
+
+$array = [1, 2, 3, 4];
+
+assert_true([0, 2, 6, 12] === map($array, fn ($item, $key) => $key * $item));
+```
+---
+## reduce
+
+### Signature
+
+```php
+function reduce(array $array, Closure $callback, mixed $carry = null): mixed
+```
+
+### Definition
+
+It returns a single value as the result of the given closure against all items in the given array.
+
+It returns the carry when the array is empty
+
+### Examples
+
+```php
+use function Saeghe\Datatype\Arr\reduce;
+
+assert_true('bar' === reduce(['foo', 'bar', 'baz'], fn ($carry, $value, $key) => $key === 1 ? $value : $carry));
+assert_true('bar' === reduce(['foo', 'bar', 'baz'], fn ($carry, $value) => $value === 'bar' ? $value : $carry));
+assert_true('foo' === reduce([], fn ($carry, $value, $key) => $value, 'foo'));
+```
+---
+## take
+
+### Signature
+
+```php
+function take(array &$array, Closure $condition): mixed
+```
+
+### Definition
+
+It takes the first value of the given array where the given condition passes and unsets the item on the original array.
+
+It returns null and keeps array intact when condition does not meet for items.
+
+### Examples
+
+```php
+use function Saeghe\Datatype\Arr\take;
+
+$arr = ['foo', 'bar', 'baz'];
+$result = take($arr, fn ($item, $key) => $item === 'bar');
+assert_true('bar' === $result);
+assert_true([0 => 'foo', 2 => 'baz'] === $arr);
+
+$arr = ['foo', 'bar', 'baz'];
+$result = take($arr, fn ($item, $key) => $item === 'qux');
+
+assert_true(null === $result);
+assert_true([0 => 'foo', 1 => 'bar', 2 => 'baz'] === $arr);
 ```
 ---
