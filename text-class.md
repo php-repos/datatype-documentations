@@ -7,7 +7,7 @@ Here you can see its API and see how to use it.
 ## Usage
 
 ```php
-use Saeghe\Datatype\Text;
+use PhpRepos\Datatype\Text;
 
 $body = new Text('This is an input');
 

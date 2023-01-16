@@ -1,10 +1,12 @@
 # Introduction
 
-The `Map` class is part of the Datatype package.
-You can use this class to make a collections of pairs.
+The `Map` class in the `datatype` package is an implementation of the `ArrayAccess`, `IteratorAggregate`, and `Countable` interfaces,
+which provides a way to work with arrays using object-oriented syntax.
+The class is designed to hold `Pair` objects, which are composed of a key-value pair.
+The `key` is used as the index and the value is the data.
 
 > **Note**
-> For more information about the Pair datatype, please read [its documentation](https://saeghe.com/packages/datatype/documentations/pair-class)
+> For more information about the Pair datatype, please read [its documentation](https://phpkg.com/packages/datatype/documentations/pair-class)
 
 Here you can see its API and see how to use it.
 
@@ -37,10 +39,9 @@ echo count($map->items()); // Output: 2
 
 Here you can see a list of the available methods on the collection:
 
----
 ### count
 
-It returns count of available items in the map.
+This method returns the number of items in the collection.
 
 ```php
 public function count(): int
@@ -53,11 +54,12 @@ $items = ['foo' => new Pair(1, 'baz'), 'bar' => new Pair(2, 'qux')];
 $map = new Map($items);
 assert_true(2 === $map->count());
 ```
----
+
 ### each
 
-The `each` method can get used to run a closure against each item of the collection.
-The `each` method always passes the value as the first argument and the key as the second argument to the given closure.
+This method takes a Closure function as a parameter.
+It iterates over the collection's items and calls the provided closure function for each item, passing the item's value and key as arguments.
+The method returns the current instance of the class.
 
 ```php
 public function each(Closure $closure): static
@@ -79,7 +81,7 @@ assert_true($actual instanceof Map);
 assert_true([new Pair(1, 'foo'), new Pair(2, 'bar')] == $actual->items());
 assert_true(['01foo', '12bar'] === $result);
 ```
----
+
 ## every
 
 ### Signature
@@ -90,13 +92,10 @@ public function every(Closure $check = null): bool
 
 ### Definition
 
+This method returns a boolean indicating whether all items in the map pass the check function.
+The check function takes two arguments: the value and the key of the current item.
+If the check function is not provided, the method checks if all items in the map have a truthy value.
 It returns true when the map is empty.
-
-It returns true when every item has value.
-
-It returns false when items are empty.
-
-It returns true when every item passes the check.
 
 ### Examples
 
@@ -129,12 +128,12 @@ assert_true($map->every(fn (Pair $item) => is_string($item->value)));
 assert_true($map->every(fn (Pair $item) => is_numeric($item->key)));
 assert_false($map->every(fn (Pair $item) => is_null($item)));
 ```
----
+
 ### except
 
-The `except` accepts a closure and returns a new map of items that do not pass the condition.
-
-The `except` method returns a new collection.
+This method returns a new `Map` object that contains items that do not pass the check function.
+The check function takes two arguments: the value and the key of the current item.
+If the check function is not provided, the method filters out items that have a truthy value.
 
 ```php
 public function except(Closure $check = null): static
@@ -178,7 +177,7 @@ assert_true([
     ] == $result->items()
 );
 ```
----
+
 ## first_key
 
 ### Signature
@@ -189,7 +188,9 @@ public function first_key(Closure $closure = null): null|int|string
 
 ### Definition
 
-It returns the key of the pair for the first item in the map that passes the given condition.
+This method returns the key of the first item in the map that passes the check function.
+The check function takes two arguments: the value and the key of the current item.
+If the check function is not provided, the method returns the first key in the map.
 
 ### Examples
 
@@ -207,7 +208,7 @@ $map->push(new Pair(3, 'baz'));
 
 assert_true(1 === $map->first_key());
 ```
----
+
 ## first
 
 ### Signature
@@ -218,9 +219,9 @@ public function first(Closure $condition = null): ?Pair
 
 ### Definition
 
-It returns the first item of the map.
-
-It returns the first item of the map that passes the given closure.
+This method returns the first item in the map that passes the check function.
+The check function takes two arguments: the value and the key of the current item.
+If the check function is not provided, the method returns the first item in the map.
 
 ### Examples
 
@@ -252,10 +253,12 @@ $result = $map->first(fn (Pair $pair) => str_starts_with($pair->value, 'b'));
 assert_true(2 === $result->key);
 assert_true('bar' === $result->value);
 ```
----
+
 ### forget
 
-It unsets items from the map that passes the given condition.
+This method removes items from the map that pass the check function.
+The check function takes two arguments: the value and the key of the current item.
+The method returns the current map object, which allows you to chain multiple calls.
 
 ```php
 public function forget(Closure $condition): static
@@ -274,7 +277,7 @@ assert_true([
     ] == $map->forget(fn (Pair $pair, int $index) => $pair === $item || $index === 1)->items()
 );
 ```
----
+
 ## has
 
 ### Signature
@@ -285,7 +288,9 @@ public function has(Closure $closure): bool
 
 ### Definition
 
-It returns true when at least one item in the map passes the given condition.
+The `has` method checks if the provided closure returns `true` for any of the elements in the map.
+The closure is passed two arguments, the value and the key of the current element.
+It returns a boolean indicating whether or not the condition is `true` for any of the elements.
 
 ### Examples
 
@@ -299,7 +304,7 @@ assert_true($map->has(fn ($item) => $item->key === 'baz'));
 assert_false($map->has(fn ($item) => $item->key === 0));
 assert_false($map->has(fn ($item) => $item->value === null));
 ```
----
+
 ## items
 
 ### Signature
@@ -310,7 +315,10 @@ public function items(): array
 
 ### Definition
 
-It returns an array contain all items of the collection.
+The `items` method in the `Map` class returns an array representation of the items in the collection.
+Each item in the array is an instance of the `Pair` class, which has two properties: key and value.
+The key property represents the index of the item in the original array,
+and the value property represents the value of the item.
 
 ### Examples
 
@@ -320,7 +328,7 @@ $map = new Map($items);
 
 assert_true(['foo' => new Pair(1, 'baz'), 'bar' => new Pair(2, 'qux')] == $map->items());
 ```
----
+
 ## last
 
 ### Signature
@@ -331,9 +339,11 @@ public function last(Closure $condition = null): ?Pair
 
 ### Definition
 
-It returns the last item of the map.
-
-It returns the last item of the map that passes the given closure.
+This method takes an optional closure as an argument that is used as a condition to filter the items in the map.
+If the closure is not provided, the method will return the last item in the map.
+If the closure is provided, the method will iterate over each item in the map and return the last item that satisfies the condition provided in the closure.
+The closure takes two arguments, the current item and its key, and should return a boolean value.
+If the condition is not met for any of the items in the map, the method will return `null`.
 
 ### Examples
 
@@ -365,10 +375,15 @@ $result = $map->last(fn (Pair $pair) => str_starts_with($pair->value, 'b'));
 assert_true(3 === $result->key);
 assert_true('baz' === $result->value);
 ```
----
+
 ### keys
 
-It returns an array contain pair's key for each pair in the map.
+This method returns an array of all the keys in the Map object.
+It iterates over the items in the `$items` property and adds each item's key to the array.
+The returned array contains the keys of the `Pair` objects in the same order as they appear in the `$items` property.
+
+> **Note**
+> It's important to note that the method does not return the index of the items in the `$items` array but the key of the Pair.
 
 ```php
 public function keys(): array
@@ -386,12 +401,13 @@ assert_true([1] === $map->keys());
 $map->put(new Pair('bar', 'baz'));
 assert_true([1, 'bar'] === $map->keys());
 ```
----
+
 ### map
 
-It returns empty array as map when there is no item in the map.
-
-It returns an array contain results of running the callable against each item in the map.
+This method is used to apply a callback function to each element in the map's underlying items array 
+and return a new array containing the results.
+The callback function takes two arguments: the value and the key of the current element. .
+If the underlying items array is empty, the method will return an empty array.
 
 ```php
 public function map(Closure $callable): array
@@ -408,12 +424,13 @@ $map->put(new Pair(1, 'foo'));
 $map->put(new Pair(2, 'bar'), 'baz');
 assert_true(['01foo', 'baz2bar'] === $map->map(fn (Pair $pair, mixed $index) => $index.$pair->key.$pair->value));
 ```
----
+
 ### push
 
 It pushes the given pair to the map items.
-
 It replaces existing pair when the pair key matches with the given pair.
+It is important to note that the push method can only be used to add `Pair` objects to the items array, and not any other data types.
+Attempting to use the push method with any other data type will result in an error.
 
 ```php
 public function push(Pair $item): static
@@ -434,13 +451,11 @@ assert_true([new Pair(1, 'foo')] == $map->items());
 $map->push(new Pair(1, 'bar'));
 assert_true([new Pair(1, 'bar')] == $map->items());
 ```
----
+
 ### put
 
 It puts the given pair in the given index to the map.
-
 If the index not passed, it puts the given pair to the map by natural index.
-
 It the index not passed and there is item by matching the given pair's key, then the item with matched key replaces.
 
 ```php
@@ -468,7 +483,7 @@ assert_true('baz' === $map->last()->value);
 $map->put($item = new Pair(3, 'qux'), 'foo');
 assert_true($item === $map->items()['foo']);
 ```
----
+
 ### reduce
 
 The `reduce` returns a single value as the result of running the given closure against all items in the map.
@@ -502,12 +517,11 @@ $map->put(new Pair(3, 'baz'));
 $result = $map->reduce(fn ($carry, Pair $pair) => $pair->value === 'not-exists' ? $pair : $carry, 'this is carry');
 assert_true('this is carry' === $result);
 ```
----
+
 ### take
 
-It takes the first value of the map that passes the given condition and unsets the item from the map.
-
-It returns null and keep the map intact when condition does not meet for items.
+It returns the first value of the map that passes the given condition and unsets the item from the map.
+It returns `null` and keep the map intact when condition does not meet for items.
 
 ```php
 public function take(Closure $condition): ?Pair
@@ -532,10 +546,10 @@ $result = $map->take(fn (Pair $pair) => $pair->value === 'qux');
 assert_true(null === $result);
 assert_true([0 => $item1, 1 => $item2, 2 => $item3] === $map->items());
 ```
----
+
 ### values
 
-It returns an array of map pair's values.
+It retrieves an array of the values stored in the map.
 
 ```php
 public function values(): array
@@ -553,4 +567,3 @@ assert_true(['foo'] === $map->values());
 $map->put(new Pair('bar', 'baz'));
 assert_true(['foo', 'baz'] === $map->values());
 ```
----

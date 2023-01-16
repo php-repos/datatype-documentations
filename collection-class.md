@@ -1,7 +1,7 @@
 # Introduction
 
-The `Collection` class is part of the Datatype package.
-You can use this class to make collections.
+The `Collection` class in the `Datatype` package provides a set of convenient methods for working with arrays.
+It implements `ArrayAccess`, `IteratorAggregate`, and `Countable` interfaces, which allows you to use it like an array.
 Here you can see its API and see how to use it.
 
 ## Usage
@@ -30,10 +30,9 @@ echo count($collection->items()); // Output: 2
 
 Here you can see a list of the available methods on the collection:
 
----
 ### count
 
-It returns count of available items in the collection.
+This method returns the number of items in the collection.
 
 ```php
 public function count(): int
@@ -45,7 +44,7 @@ public function count(): int
 $collection = new Collection([1 => 'John', 2 => 'Jane']);
 assert_true(2 === $collection->count());
 ```
----
+
 ### each
 
 The `each` method can get used to run a closure against each item of the collection.
@@ -64,13 +63,12 @@ $collection->each(function ($value, $key) {
 });
 ```
 
-Output:
-
 ```shell
+// Output:
 1 John
 2 Jane
 ```
----
+
 ## every
 
 ### Signature
@@ -81,9 +79,8 @@ public function every(Closure $check = null): bool
 
 ### Definition
 
-It returns true when every item in the collection passes the check, otherwise, it returns false.
-
-If the check is null or not given, it returns true when every item on the collection is valid.
+This method checks whether all items in the collection pass the provided check closure.
+If no closure is provided, it returns true if all items are truthy.
 
 ### Examples
 
@@ -98,9 +95,8 @@ echo (int) new Collection([null, 0, '', []])->every(); // Output: 0
 ---
 ### except
 
-The `except` accepts a closure and returns a new collection of items that do not pass the condition.
-
-The `except` method returns a new collection.
+This method returns a new collection containing all items that don't pass the provided check closure.
+If no closure is provided, it returns all items that are falsy.
 
 ```php
 public function except(Closure $check = null): static
@@ -116,20 +112,18 @@ $result = $collection->except(function ($value, $key) {
 var_dump($result);
 ```
 
-Output:
-
 ```shell
+// Output:
 array(1) {
   [2]=>
   string(4) "Jane"
 }
 ```
----
+
 ### filter
 
-The `filter` accepts a closure and returns a new collection of items that passes the condition.
-
-The `filter` method returns a new collection.
+This method returns a new collection containing all items that pass the provided filter closure.
+If no closure is provided, it returns all items that are truthy.
 
 ```php
 public function filter(Closure $closure = null): static
@@ -145,15 +139,14 @@ $result = $collection->filter(function ($value, $key) {
 var_dump($result);
 ```
 
-Output:
-
 ```shell
+// Output:
 array(1) {
   [1]=>
   string(4) "John"
 }
 ```
----
+
 ## first_key
 
 ### Signature
@@ -164,11 +157,9 @@ public function first_key(Closure $condition = null): string|int|null
 
 ### Definition
 
-It returns the key of the first item in the collection that passes the given condition.
-
-It returns the first key of the collection when the condition is null or not given.
-
-It returns `null` when the collection is empty.
+This method returns the key of the first item in the collection that passes the provided condition closure.
+If no closure is provided, it returns the first key of the collection.
+If the collection is empty, it returns `null`.
 
 ### Examples
 
@@ -180,7 +171,7 @@ echo new Collection([1 => 'bar', 'foo' => 'baz'])->first_key(); // Output: 1
 echo new Collection('foo' => ['bar'], 'bar' => 'baz')->first_key(); // Output: 'foo'
 assert_true(null === new Collection([])->first_key());
 ```
----
+
 ## first
 
 ### Signature
@@ -191,11 +182,9 @@ public function first(Closure $condition = null): mixed
 
 ### Definition
 
-It returns the value of the first item in the given array that passes the given condition.
-
-It returns the first value of the array when the condition is null or not given.
-
-It returns `null` when the given array is empty.
+This method returns the first item in the collection that passes the provided condition closure.
+If no closure is provided, it returns the first item of the collection.
+If the collection is empty, it returns `null`.
 
 ### Examples
 
@@ -207,11 +196,10 @@ assert_true(1 === new Collection([1, 'foo'])->first());
 assert_true(['bar'] === new Collection(['bar'], 'foo')->first());
 assert_true(null === new Collection([])->first());
 ```
----
+
 ### forget
 
-It unsets items from the collection that passes the given condition.
-
+This method removes all items from the collection that pass the provided condition closure, and returns the collection object.
 It does nothing when the check returns null for items.
 
 ```php
@@ -231,15 +219,14 @@ assert_true([1 => 'foo', 2 => 'bar'] === $collection->items());
 
 ```
 
-Output:
-
 ```shell
+// Output:
 array(1) {
   [2]=>
   string(4) "Jane"
 }
 ```
----
+
 ## has
 
 ### Signature
@@ -250,7 +237,8 @@ public function has(Closure $closure): bool
 
 ### Definition
 
-It returns true when at least one item in the collection passes the given condition.
+This method checks whether the collection contains any items that pass the provided closure.
+It returns `true` if at least one item passes the closure, and `false` otherwise.
 
 ### Examples
 
@@ -260,7 +248,7 @@ assert_true(new Collection(['foo' => 'bar', 'baz' => 'qux'])->has(fn ($item, $ke
 assert_false(new Collection(['foo' => 'bar', 'baz' => 'qux'])->has(fn ($item, $key) => $key === 0));
 assert_false(new Collection(['foo' => 'bar', 'baz' => 'qux'])->has(fn ($item, $key) => $item === null));
 ```
----
+
 ## items
 
 ### Signature
@@ -271,7 +259,7 @@ public function items(): array
 
 ### Definition
 
-It returns an array contain all items of the collection.
+This method returns the underlying array of the collection.
 
 ### Examples
 
@@ -279,10 +267,10 @@ It returns an array contain all items of the collection.
 $collection = new Collection(['foo' => 'bar', 'baz' => 'qux'];
 assert_true(['foo' => 'bar', 'baz' => 'qux'] === $collection->items());
 ```
----
+
 ### keys
 
-The `keys` method returns the collection's keys as an array.
+This method returns the keys of the underlying array of the collection.
 
 ```php
 public function keys(): array
@@ -295,9 +283,8 @@ $collection = new Collection([1 => 'John', 2 => 'Jane']);
 var_dump($collection->keys());
 ```
 
-Output:
-
 ```shell
+// Output:
 array(2) {
   [0]=>
   int(1)
@@ -305,7 +292,7 @@ array(2) {
   int(2)
 }
 ```
----
+
 ## last_key
 
 ### Signature
@@ -316,11 +303,9 @@ public function last_key(Closure $condition = null): string|int|null
 
 ### Definition
 
-It returns the key of the last item in the collection that passes the given condition.
-
-It returns the last key of the collection when the condition is null or not given.
-
-It returns `null` when the given collection is empty.
+This method returns the key of the last item in the collection that passes the provided condition closure.
+If no closure is provided, it returns the last key of the collection.
+If the collection is empty, it returns `null`.
 
 ### Examples
 
@@ -332,7 +317,7 @@ assert_true('' === new Collection(['foo' => 'bar', null => 'foo'])->last_key());
 assert_true(1 === new Collection(['foo' => 'baz', 1 => 'bar'])->last_key());
 assert_true('foo' === new Collection(['bar' => 'baz', 'foo' => ['bar']])->last_key());
 ```
----
+
 ## last
 
 ### Signature
@@ -343,11 +328,9 @@ public function last(Closure $condition = null): mixed
 
 ### Definition
 
-It returns the value of the last item in the collection that passes the given condition.
-
-It returns the last value of the collection when the condition is null or not given.
-
-It returns `null` when the collection is empty.
+This method returns the last item in the collection that passes the provided condition closure.
+If no closure is provided, it returns the last item of the collection.
+If the collection is empty, it returns `null`.
 
 ### Examples
 
@@ -359,7 +342,7 @@ assert_true(1 === new Collection(['foo', 1])->last());
 assert_true(['bar'] === new Collection(['foo', ['bar']])->last());
 assert_true(null === new Collection([])->last())
 ```
----
+
 ## map
 
 ### Signature
@@ -370,7 +353,7 @@ public function map(Closure $closure): array
 
 ### Definition
 
-It returns an array contain returned value by running each item of the collection against the given closure.
+This method applies the provided closure to each item in the collection and returns an array of the results.
 
 ### Examples
 
@@ -379,10 +362,10 @@ $collection = new Collection(['foo', 'bar', 'baz']);
 
 assert_true(['0foo', '1bar', '2baz'] === $collection->map(fn ($item, $key) => $key.$item));
 ```
----
+
 ### push
 
-It pushes the given item to the collection.
+This method adds the provided value to the end of the collection.
 
 ```php
 public function push(mixed $value): static
@@ -396,12 +379,11 @@ $collection->push('baz');
 
 assert_true([1 => 'foo', 2 => 'bar', 'baz'] === $collection->items());
 ```
----
+
 ### put
 
-It puts the given item at the given index in the collection.
-
-It puts items to the collection by natural key when it is not passed.
+This method adds the provided value to the collection at the provided key.
+If no key is provided, the value is added to the array by natural key.
 
 ```php
 public function put(mixed $value, int|string|null $key = null): static
@@ -419,10 +401,11 @@ $collection->put('baz');
 
 assert_true([1 => 'foo', 2 => 'bar', 'baz'] === $collection->items());
 ```
----
+
 ### reduce
 
-The `reduce` returns a single value as the result of running the given closure against all items in the collection.
+This method applies the provided closure to each item in the collection and returns a single value.
+The closure takes 3 arguments: the carry value, the current item, and the current key.
 It works just like the `array_reduce` function. If no carry passed, the initial carry sets as `null`.
 
 ```php
@@ -439,12 +422,11 @@ $result = $collection->reduce(function ($carry, $value) {
 
 var_dump($result); // Output: bool(true)
 ```
----
+
 ### take
 
-It takes the first value of the collection that passes the given condition and unsets the item from the collection.
-
-It returns null and keep the collection intact when condition does not meet for items.
+This method returns the first item in the collection that passes the provided condition closure and removes it from the collection.
+If no item passes the condition, it returns `null`.
 
 ```php
 public function take(Closure $condition): mixed
@@ -463,10 +445,10 @@ $result = $collection->take(fn ($item, $key) => $item === 'qux');
 assert_true(null === $result);
 assert_true([0 => 'foo', 1 => 'bar', 2 => 'baz'] === $collection->items());
 ```
----
+
 ### values
 
-The `values` method returns an array of values from the collection.
+This method returns an array of the values in the collection.
 
 ```php
 public function values(): array
@@ -479,9 +461,8 @@ $collection = new Collection([1 => 'John', 2 => 'Jane']);
 var_dump($collection->values());
 ```
 
-Output:
-
 ```shell
+// Output:
 array(2) {
   [0]=>
   string(4) "John"
@@ -489,4 +470,3 @@ array(2) {
   string(4) "Jane"
 }
 ```
----

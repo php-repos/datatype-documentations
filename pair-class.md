@@ -18,11 +18,9 @@ assert_true(['key' => 1, 'value' => 'foo'] === $pair->get());
 
 Here you can see a list of the available methods on the collection:
 
----
 ### get
 
-It returns an array of key and value 
-where the key index contains the key of the pair and the value index contains the value of the pair.
+It returns an array of key and value where the `key` index contains the key of the pair and the `value` index contains the value of the pair.
 
 ```php
 public function get(): array
@@ -34,7 +32,7 @@ public function get(): array
 $pair = new Pair(1, 'foo');
 assert_true(['key' => 1, 'value' => 'foo'] === $pair->get());
 ```
----
+
 ### value
 
 It returns a new pair object by setting the value of the pair to the given value.
@@ -53,4 +51,3 @@ assert_true($pair->value === 'foo');
 assert_true(1 === $new_pair->key);
 assert_true('bar' === $new_pair->value);
 ```
----

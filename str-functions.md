@@ -3,7 +3,6 @@
 The `Str` namespace is part of the Datatype package.
 Here you can see a list of included functions and their documentation.
 
----
 ## after_first_occurrence
 
 ### Signature
@@ -14,11 +13,8 @@ function after_first_occurrence(string $subject, string $needle): string
 
 ### Definition
 
-The `after_first_occurance` returns the substring of the given subject after the first occurrence of the given needle.
-
-It returns the subject if the needle is an empty string.
-
-It returns the subject string when the subject does not contain the needle.
+This function returns the substring from the first occurrence of the $needle to the end of the $subject string.
+If `$needle` is an empty string or not found in the subject, it returns the original `$subject`.
 
 ### Examples
 
@@ -28,7 +24,7 @@ echo after_first_occurrence('My\Class\Name', '\\'); // Output: 'Class\Name'
 echo after_first_occurrence('This is another sentence contains i to test', 'c'); // Output: 'e contains i to test'
 echo after_first_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
----
+
 ## after_last_occurrence
 
 ### Signature
@@ -39,11 +35,8 @@ function after_last_occurrence(string $subject, string $needle): string
 
 ### Definition
 
-The `after_last_occurrence` returns the given subject’s substring after the given needle’s last occurrence.
-
-It returns the subject string when the needle is empty.
-
-It returns the subject string when the subject does not contain the needle.
+This function returns the substring from the last occurrence of the `$needle` to the end of the `$subject` string.
+If `$needle` is an empty string or not found in the subject, it returns the original `$subject`.
 
 ### Examples
 
@@ -53,7 +46,7 @@ echo after_last_occurrence('My\Class\Name', '\\'); // Output: 'Name'
 echo after_last_occurrence('This is another sentence contains i to test', 'c'); // Output: ' to test'
 echo after_last_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
----
+
 ## before_first_occurrence
 
 ### Signature
@@ -64,11 +57,8 @@ function before_first_occurrence(string $subject, string $needle): string
 
 ### Definition
 
-The `before_first_occurrence` returns the substring of the given subject before the first occurrence of the given needle.
-
-It returns the subject string when the needle is empty.
-
-It returns the subject string when the subject does not contain the needle.
+This function returns the substring from the start of the `$subject` string to the first occurrence of the `$needle`.
+If `$needle` is an empty string or not found in the subject, it returns the original `$subject`.
 
 ### Examples
 
@@ -78,7 +68,7 @@ echo before_first_occurrence('My\Class\Name', '\\'); // Output: 'My'
 echo before_first_occurrence('This is another sentence contains i to test', 'c'); // Output: 'This is another senten'
 echo before_first_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
----
+
 ## before_last_occurrence
 
 ### Signature
@@ -89,11 +79,8 @@ function before_last_occurrence(string $subject, string $needle): string
 
 ### Definition
 
-The `before_last_occurrence` returns the substring of the given subject before the first occurrence of the given needle.
-
-It returns the subject when the needle is empty.
-
-It returns the subject when the subject does not contain the needle.
+This function returns the substring from the start of the `$subject` string to the last occurrence of the `$needle`.
+If `$needle` is an empty string or not found in the subject, it returns the original `$subject`.
 
 ### Examples
 
@@ -103,7 +90,7 @@ echo before_last_occurrence('My\Class\Name', '\\'); // Output: 'My\Class'
 echo before_last_occurrence('This is another sentence contains i to test', 'i'); // Output: 'This is another sentence contains '
 echo before_last_occurrence('hello world', 'my'); // Output: 'hello world'
 ```
----
+
 ## between
 
 ### Signature
@@ -114,12 +101,9 @@ function between(string $subject, string $start, string $end): string
 
 ### Definition
 
-The `between` returns substring in the given subject between the given start and the given end substrings.
-
+This function returns the substring between the first occurrence of `$start` and the first occurrence of `$end` in the `$subject` string.
 It returns the substring in the given subject from the given start to the end of the subject when the given end is empty.
-
 It returns the substring in the given subject from the start to the given end of the subject when the given start is empty.
-
 It returns the given subject when the start and the end are empty strings.
 
 ### Examples
@@ -130,7 +114,7 @@ echo between('This is hello world', 'This is ', ' world'); // Output: 'hello'
 echo between('This is hello world', '', ' world'); // Output: 'This is hello'
 echo between('This is hello world', '', ''); // Output: 'This is hello world'
 ```
----
+
 ## first_character
 
 ### Signature
@@ -142,7 +126,6 @@ function first_character(string $subject): string
 ### Definition
 
 It returns the first character of the given subject.
-
 It returns an empty string when the subject is an empty string.
 
 ### Examples
@@ -152,7 +135,7 @@ echo first_character('Hello World'); // Output: 'H'
 echo first_character(' Hello World!'); // Output: ' '
 echo first_character(''); // Output: ''
 ```
----
+
 ## last_character
 
 ### Signature
@@ -164,7 +147,6 @@ function last_character(string $subject): string
 ### Definition
 
 It returns the last character of the given subject.
-
 It returns an empty string when the subject is an empty string.
 
 ### Examples
@@ -174,7 +156,7 @@ echo last_character('Hello World'); // Output: 'd'
 echo last_character('Hello World!'); // Output: '!'
 echo last_character(''); // Output: ''
 ```
----
+
 ## remove_first_character
 
 ### Signature
@@ -186,7 +168,6 @@ function remove_first_character(string $subject): string
 ### Definition
 
 It removes the first character of the given subject and returns the remaining substring.
-
 It returns an empty string when the given string is an empty string.
 
 ### Examples
@@ -195,7 +176,7 @@ It returns an empty string when the given string is an empty string.
 echo remove_first_character('hello world'); // Output: 'ello world'
 echo remove_first_character(''); // Output: ''
 ```
----
+
 ## remove_last_character
 
 ### Signature
@@ -207,7 +188,6 @@ function remove_last_character(string $subject): string
 ### Definition
 
 It removes the last character of the given subject and returns the remaining substring.
-
 It returns an empty string when the given string is an empty string.
 
 ### Examples
@@ -216,7 +196,7 @@ It returns an empty string when the given string is an empty string.
 echo remove_last_character('hello world'); // Output: 'hello worl'
 echo remove_last_character(''); // Output: ''
 ```
----
+
 ## replace_first_occurrence
 
 ### Signature
@@ -228,9 +208,7 @@ function replace_first_occurrence(string $subject, string $search, string $repla
 ### Definition
 
 It replaces the first occurrence of the given substring in the given subject.
-
 It returns an empty string when the given subject is an empty string.
-
 It returns the subject when it does not contain the search substring.
 
 ### Examples
@@ -242,7 +220,7 @@ echo replace_first_occurrence('hello world hello', 'hello', 'hi'); // Output: 'h
 echo replace_first_occurrence('', 'hello', 'hi'); // Output: ''
 echo replace_first_occurrence('hello world', 'universe', 'hi'); // Output: 'hello world'
 ```
----
+
 ## starts_with_regex
 
 ### Signature
@@ -254,7 +232,6 @@ function starts_with_regex(string $subject, string $pattern): bool
 ### Definition
 
 It checks if the given subject starts with the given regex.
-
 It adds extra backslashes when the regex finishes with a backslash.
 
 ### Examples
@@ -268,4 +245,3 @@ echo (string) starts_with_regex('c:\\filename', '[A-Za-z]:\\'); // Output: 1
 echo (string) starts_with_regex(':\\', '[A-Za-z]:\\'); // Output: 0
 echo (string) starts_with_regex('/root', '[A-Za-z]:\\'); // Output: 0
 ```
----
