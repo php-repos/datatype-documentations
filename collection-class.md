@@ -423,6 +423,25 @@ $result = $collection->reduce(function ($carry, $value) {
 var_dump($result); // Output: bool(true)
 ```
 
+### skip
+
+The `skip` method returns a new collection by skipping the specified number of elements from the beginning of the given collection.
+
+```php
+public function skip(int $offset): static
+```
+
+#### Example
+
+```php
+$collection = new Collection(['foo', 'bar', 'baz']);
+
+assert_true(['foo', 'bar', 'baz'] === $collection->skip(0)->items());
+assert_true(['bar', 'baz'] === $collection->skip(1)->items());
+assert_true(['baz'] === $collection->skip(2)->items());
+assert_true([] === $collection->skip(3)->items());
+```
+
 ### take
 
 This method returns the first item in the collection that passes the provided condition closure and removes it from the collection.

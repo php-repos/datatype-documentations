@@ -178,6 +178,48 @@ assert_true([
 );
 ```
 
+## filter
+
+### Signature
+
+```php
+public function filter(Closure $check = null): static
+```
+
+### Definition
+
+The `filter` method returns a new map containing only the elements that satisfy the given condition specified
+by the `$check` closure. If no closure is provided, it removes all elements that are considered "falsy" 
+(e.g., `null`, `false`, `0`, `''`).
+
+### Examples
+
+```php
+$map = new Map();
+$map->put(new Pair(1, 'foo'));
+$map->put($item2 = new Pair(2, 'bar'));
+$map->put($item3 = new Pair(3, 'baz'));
+$map->put($item4 = new Pair(4, 'qux'));
+
+$result = $map->filter(function (Pair $pair, $key) {
+    return $key === 1 || $pair->value === 'baz' || $pair->key === 4;
+});
+
+assert_true($result instanceof Map);
+assert_true([1 => $item2, 2 => $item3, 3 => $item4] === $result->items());
+
+$map = new Map();
+$map->put(new Pair(1, null));
+$map->put(new Pair(2, ''));
+$map->put(new Pair(3, 0));
+$map->put($item4 = new Pair(4, 'foo'));
+
+$result = $map->filter();
+
+assert_true($result instanceof Map);
+assert_true([3 => $item4] === $result->items());
+```
+
 ## first_key
 
 ### Signature
@@ -516,6 +558,28 @@ $map->put(new Pair(2, 'bar'));
 $map->put(new Pair(3, 'baz'));
 $result = $map->reduce(fn ($carry, Pair $pair) => $pair->value === 'not-exists' ? $pair : $carry, 'this is carry');
 assert_true('this is carry' === $result);
+```
+
+### skip
+
+The `skip` method returns a new map by skipping the specified number of elements from the beginning of the given map.
+
+```php
+public function skip(int $offset): static
+```
+
+#### Example
+
+```php
+$map = new Map();
+$map->push($item1 = new Pair(1, 'foo'));
+$map->push($item2 = new Pair(2, 'bar'));
+$map->push($item3 = new Pair(3, 'baz'));
+
+assert_true([0 => $item1, 1 => $item2, 2 => $item3] === $map->skip(0)->items());
+assert_true([0 => $item2, 1 => $item3] === $map->skip(1)->items());
+assert_true([0 => $item3] === $map->skip(2)->items());
+assert_true([] === $map->skip(3)->items());
 ```
 
 ### take

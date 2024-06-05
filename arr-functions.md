@@ -251,6 +251,31 @@ assert_true('bar' === reduce(['foo', 'bar', 'baz'], fn ($carry, $value) => $valu
 assert_true('foo' === reduce([], fn ($carry, $value, $key) => $value, 'foo'));
 ```
 
+## skip
+
+### Signature
+
+```php
+function skip(array $array, int $offset): array
+```
+
+### Definition
+
+The `skip` function returns a new array by skipping the first `$offset` elements from the given array.
+
+### Examples
+
+```php
+use function PhpRepos\Datatype\Arr\skip;
+
+$arr = ['foo', 'bar', 'baz'];
+
+assert_true(['foo', 'bar', 'baz'] === skip($arr, 0));
+assert_true(['bar', 'baz'] === skip($arr, 1));
+assert_true(['baz'] === skip($arr, 2));
+assert_true([] === skip($arr, 3));
+```
+
 ## take
 
 ### Signature
